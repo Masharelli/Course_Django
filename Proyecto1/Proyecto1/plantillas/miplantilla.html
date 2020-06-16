@@ -6,12 +6,34 @@
     </h1>
     <p>
         <!--Para poder hacer uso de las variables de django es entre {{variable}}-->
-        El nombre del visitante es: {{nombre_persona}} {{apellido_persona}}
+        El nombre del visitante es: {{nombre_persona}} {{apellido_persona}} {{summoner}}
     </p>
     <p>
         <!--Podemos al igual observar que simplemente-->
         Hoy estamos a: {{fecha.date}}
     </p>
+
+    <p>
+        <strong>
+                Temas del curso:
+            </strong>
+    </p>
+
+    <p>
+        <ul>
+            {% if temas %} {% for i in temas %}
+            <li>
+                {{i}}
+            </li>
+            {% endfor %} {%else%}
+            <p>
+                No hay elementos que mostrar
+            </p>
+            {% endif %}
+        </ul>
+
+    </p>
+
 </body>
 
 </html>

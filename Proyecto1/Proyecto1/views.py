@@ -2,41 +2,50 @@ from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
 
-
+#Se crea una clase en la cual es una Persona con sus parametros
 class Persona(object):
-    def __init__(self, nombre, apellido):
+    #Inicializamos su constructor init lleva dos guiones
+    def __init__(self, nombre, apellido, sumonner):
 
         self.nombre = nombre
 
         self.apellido = apellido
+
+        self.sumonner = sumonner
 
 # primera vista
 
 
 def saludo(request):
 
-    p1=Persona("Javier", "Aguayo")
+    #Aqui pasamos los parametros de una persona
+    p1=Persona("Javier", "Aguayo", "El Sombreroo")
 
-    nombre = "Hugo"
+    #nombre = "Hugo"
 
-    apellido = "Rocha"
+    #apellido = "Rocha"
+
+    temasDelCurso = ["Plantillas","Modelos","Formularios","Vistas","Despliegue"]
 
     ahora = datetime.datetime.now()
 
-    # Para darle formato a las cosas simplemnte se crea una variable en el cual abrimos el documento
+    # Para darle formato a las cosas simplemnte se crea una variable en el cual abrimos el Template
     doc_externos = open(
         "C:/Users/chama/Desktop/Course_Django/Proyecto1/Proyecto1/plantillas/miplantilla.html")
 
+    #Leo el Template
     plt = Template(doc_externos.read())
 
+    #Cierro Template
     doc_externos.close()
 
     # Contexto es el argumento para el render, en el cual podemos guardar diccionarios para poder usar estructuras o variables
     # En el argumento del contexto pasamos las variables al igual se puede dar el valor en el mismo contexto
     ctx = Context({"nombre_persona": p1.nombre,
-                   "apellido_persona": p1.apellido, 
+                   "apellido_persona": p1.apellido,
+                   "summoner": p1.sumonner,
                    "fecha": ahora,
-                   })
+                   "temas":temasDelCurso})
 
     documento = plt.render(ctx)
 
