@@ -2,18 +2,41 @@ from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
 
+
+class Persona(object):
+    def __init__(self, nombre, apellido):
+
+        self.nombre = nombre
+
+        self.apellido = apellido
+
 # primera vista
 
+
 def saludo(request):
-    # Para darle formato a las cosas simplemnte se crea una variable
-    doc_externos = open("C:/Users/chama/Desktop/Course_Django/Proyecto1/Proyecto1/plantillas/miplantilla.html")
+
+    p1=Persona("Javier", "Aguayo")
+
+    nombre = "Hugo"
+
+    apellido = "Rocha"
+
+    ahora = datetime.datetime.now()
+
+    # Para darle formato a las cosas simplemnte se crea una variable en el cual abrimos el documento
+    doc_externos = open(
+        "C:/Users/chama/Desktop/Course_Django/Proyecto1/Proyecto1/plantillas/miplantilla.html")
 
     plt = Template(doc_externos.read())
 
     doc_externos.close()
 
-    # Entonces simplemente le pedimos al return que regrese esta variablee
-    ctx = Context()
+    # Contexto es el argumento para el render, en el cual podemos guardar diccionarios para poder usar estructuras o variables
+    # En el argumento del contexto pasamos las variables al igual se puede dar el valor en el mismo contexto
+    ctx = Context({"nombre_persona": p1.nombre,
+                   "apellido_persona": p1.apellido, 
+                   "fecha": ahora,
+                   })
 
     documento = plt.render(ctx)
 
@@ -23,7 +46,9 @@ def saludo(request):
 def despedida(request):
     return HttpResponse("Gracias por visitar esta pagina")
 
-#Esto regresa la fecha actual
+# Esto regresa la fecha actual
+
+
 def dameFecha(reequest):
     fecha_actal = datetime.datetime.now()
 
@@ -38,8 +63,9 @@ def dameFecha(reequest):
 
     return HttpResponse(documento)
 
+
 def calculaEdad(request, agno, edad):
-   
+
     periodo = agno - 2020
     edadFutura = edad + periodo
     documento = """
@@ -51,6 +77,6 @@ def calculaEdad(request, agno, edad):
     </h2>
     </bodo>
     </div>
-    """ %(agno, edadFutura)
+    """ % (agno, edadFutura)
 
     return HttpResponse(documento)
