@@ -4,6 +4,14 @@
     <h1 style="color: aqua;">
         Hola como estas Hugo
     </h1>
+
+    {% if nombre_persona == 'Javier' %}
+        <p>El Curso lo imparte Hugo Masharelli</p>
+    {% else %}
+        <p> El curso lo imparte el profesor suplente <p>
+    {% endif %}
+
+
     <p>
         <!--Para poder hacer uso de las variables de django es entre {{variable}}-->
         El nombre del visitante es: {{nombre_persona}} {{apellido_persona}} {{summoner}}
