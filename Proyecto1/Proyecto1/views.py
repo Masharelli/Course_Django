@@ -2,6 +2,7 @@ from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
 from django.template import loader
+from django.shortcuts import render
 
 # Se crea una clase en la cual es una Persona con sus parametros
 
@@ -24,9 +25,6 @@ def saludo(request):
     # Aqui pasamos los parametros de una persona
     p1 = Persona("Javier", "Aguayo", "El Sombreroo")
 
-    #nombre = "Hugo"
-
-    #apellido = "Rocha"
 
     temasDelCurso = ["Plantillas", "Modelos",
                      "Formularios", "Vistas", "Despliegue"]
@@ -37,27 +35,11 @@ def saludo(request):
     open_planitlla = loader.get_template('miplantilla.html')
 
 
-    # Para darle formato a las cosas simplemnte se crea una variable en el cual abrimos el Template
-    #doc_externos = open(
-      #  "C:/Users/chama/Desktop/Course_Django/Proyecto1/Proyecto1/plantillas/miplantilla.html")
-
-    # Leo el Template
-    #plt = Template(doc_externos.read())
-
-    # Cierro Template
-    #doc_externos.close()
-
-    # Contexto es el argumento para el render, en el cual podemos guardar diccionarios para poder usar estructuras o variables
-    # En el argumento del contexto pasamos las variables al igual se puede dar el valor en el mismo contexto
- 
-    # Renderisamos y lo que pasamos de contexto seria el dicceonario
-    documento = open_planitlla.render({"nombre_persona": p1.nombre,
+    return render(request, "miplantilla.html", {"nombre_persona": p1.nombre,
                    "apellido_persona": p1.apellido,
                    "summoner": p1.sumonner,
                    "fecha": ahora,
                    "temas": temasDelCurso})
-
-    return HttpResponse(documento)
 
 
 def despedida(request):
@@ -97,3 +79,13 @@ def calculaEdad(request, agno, edad):
     """ % (agno, edadFutura)
 
     return HttpResponse(documento)
+
+def cursoC(request):
+    fecha_actal = datetime.datetime.now()
+
+    return render(request, "CursoC.html", {"dameFecha": fecha_actal})
+
+def cursoCss(request):
+    fecha_actal = datetime.datetime.now()
+
+    return render(request, "cursoCss.html", {"dameFecha": fecha_actal})

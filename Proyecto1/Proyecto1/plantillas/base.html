@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <title>
+        {% block blockname %} {% endblock blockname %}
+    </title>
+</head>
+
+<body>
+
+
+    <h1 style="background-color: darkolivegreen; color: white; text-align: center;"> Masha Blogs </h1>
+    {% include "superior/barra.html" %}
+    <h2 style="text-align: center;"> Curso de Python</h2>
+
+    <!-- Lo que se encuentre aqui es lo que cambiara-->
+    {% block content %} {% endblock content %}
+
+    <p style="background-color: darkolivegreen; color: white; text-align: center;">Gracias por su visita </p>
+</body>
+
+</html>
